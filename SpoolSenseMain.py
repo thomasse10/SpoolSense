@@ -1,17 +1,24 @@
-#MAIN CODE
+#MAIN SCRIPT
 #Created by thomasse10 on GitHub
-
-#testing out main loop
 
 #imports
 import json
 
+#clear spools variable
+spools = []
+
 #create spool
 def create_spool():
-    pass
+    print("--Create Spool--")
+    sbrand = input("Enter brand of Filament: ").strip()
+    stype = input("Enter type of Filament: ").strip()
+    scolour = input("Enter colour of Filament: ").strip()
+    sweight = input("Enter weight of spool: ").strip()
+
 
 def main_menu():
-    print("Please choose an option:\n1. Hello \n2. World")
+    print("---Main Menu---")
+    print("Please choose an option:\n1. Add new Spool \n2. Change Spool weight")
     choice = input("> ").strip()
 
     if not choice.isdigit():
@@ -22,9 +29,9 @@ def main():
     while True:
         menu_choice = main_menu()
         if menu_choice == 1:
-            print("hello")
+            create_spool()
         elif menu_choice == 2:
-            print("world")
+            print("2 has been selected")
         else:
             print("Error, try again")
 
