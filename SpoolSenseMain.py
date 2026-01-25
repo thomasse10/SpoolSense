@@ -12,6 +12,9 @@ def debugprint(msg):
 #imports
 import json
 
+#save file location
+SAVEFILE = "spools.json"
+
 #clear spools variable
 spools = []
 
@@ -19,28 +22,11 @@ spools = []
 def create_spool():
     print("--Create Spool--")
     sbrand = input("Enter brand of Filament: ").strip()
-    while not sbrand:
-        sbrand = input("Cannot be empty.\nEnter brand of Filament: ").strip()
-    if sbrand:
-        sbrand = sbrand.lower()
-        debugprint(sbrand)
+    debugprint(sbrand)
     stype = input("Enter type of Filament: ").strip()
-    while not stype:
-        stype = input("Cannot be empty.\nEnter type of Filament: ").strip()
-    if stype:
-        stype = stype.lower()
-        debugprint(stype)
+    debugprint(stype)
     scolour = input("Enter colour of Filament: ").strip()
-    while not scolour:
-        scolour = input("Cannot be empty.\nEnter colour of Filament: ").strip()
-    if scolour:
-        scolour = scolour.lower()
-        debugprint(scolour)
-#    sweight = input("Enter weight of spool: ").strip()
-#    while not sweight:
-#        sweight = input("Enter weight of Filament: ").strip()
-#    if sweight:
-#        sweight = sweight.lower()
+    debugprint(scolour)
     newspool = sbrand, stype, scolour
     debugprint(newspool)
     return newspool
