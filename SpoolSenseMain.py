@@ -20,21 +20,30 @@ spools = []
 
 #save spools
 def save_spools():
-    with open(SAVEFILE, "w") as f:
-        json.dump(spools, f, indent=4)
-    with open(SAVEFILE, "r") as f:
-        savecheck = json.load(f)
-    if savecheck == spools:
-        print("File saved sucessfully")
-    else:
+    try:
+        with open(SAVEFILE, "w") as f:
+            json.dump(spools, f, indent=4)
+        with open(SAVEFILE, "r") as f:
+            savecheck = json.load(f)
+        if savecheck == spools:
+            print("File saved successfully")
+        else:
+            print("Save file does not match memory! Please try again.")
+    except Exception as e:
+        debugprint(e)
         print("Failed to save. Please try again.")
 
 #load spools
 def load_spools():
     global spools
-    with open(SAVEFILE, "r") as f:
-        spools = json.load(f)
-        print("File loaded successfully.")
+    try:
+        with open(SAVEFILE, "r") as f:
+            spools = json.load(f)
+            print("File loaded successfully.")
+    except FileNotFoundError:
+        print("Save file could not be found.")
+    except:
+        print("An error occured loading the save file. Please try again. ")
     
 
 #create spool
@@ -69,7 +78,7 @@ def main():
             create_spool()
         elif menu_choice == 2:
             for s in spools:
-                print(s["sbrand"], s["stype"], s["sbrand"])
+                print(s["sbrand"], s["stype"], s["scolour"],s["sweight"])
         elif menu_choice == 3:
             save_spools()
         elif menu_choice == 4:
