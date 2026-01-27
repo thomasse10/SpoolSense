@@ -39,10 +39,14 @@ def load_spools():
     try:
         with open(SAVEFILE, "r") as f:
             spools = json.load(f)
-            print("File loaded successfully.")
+        if spools.strip() == []:
+            print("Save file loaded successfully. \nWARNING: Save file is empty. ")
+        else:
+            print("Save file loaded successfully. ")
     except FileNotFoundError:
         print("Save file could not be found.")
-    except:
+    except Exception as e:
+        debugprint(e)
         print("An error occured loading the save file. Please try again. ")
     
 
