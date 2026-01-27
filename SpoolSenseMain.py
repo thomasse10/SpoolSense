@@ -18,23 +18,44 @@ SAVEFILE = "spools.json"
 #clear spools variable
 spools = []
 
+#save spools
+def save_spools():
+    with open(SAVEFILE, "w") as f:
+        json.dump(spools, f, indent=4)
+    with open(SAVEFILE, "r") as f:
+        savecheck = json.load(f)
+    if savecheck == spools:
+        print("File saved sucessfully")
+    else:
+        print("Failed to save. Please try again.")
+
+#load spools
+def load_spools():
+    global spools
+    with open(SAVEFILE, "r") as f:
+        spools = json.load(f)
+        print("File loaded successfully.")
+    
+
 #create spool
 def create_spool():
-    print("--Create Spool--")
-    sbrand = input("Enter brand of Filament: ").strip()
-    debugprint(sbrand)
-    stype = input("Enter type of Filament: ").strip()
-    debugprint(stype)
-    scolour = input("Enter colour of Filament: ").strip()
-    debugprint(scolour)
-    newspool = sbrand, stype, scolour
-    debugprint(newspool)
-    return newspool
+    global spools
+    spoolused = input("Has this Spool been used before? Y/N: ")
+    if spoolused.lower() == "n":
+        sbrand = input("Enter brand of Filament: ").strip().lower()
+        debugprint(sbrand)
+        stype = input("Enter type of Filament: ").strip().lower()
+        debugprint(stype)
+        scolour = input("Enter colour of Filament: ").strip().lower()
+        debugprint(scolour)
+        sweight = float(input("Enter weight of filament in kg: ").strip())
+        spools.append({"sbrand": sbrand, "stype": stype, "scolour": scolour, "sweight": sweight})
+        return None
 
 
 def main_menu():
     print("---Main Menu---")
-    print("Please choose an option:\n1. Add new Spool \n2. Change Spool weight")
+    print("Please choose an option:\n1. Add new Spool \n2. View Spools\n3. Save Spools\n4. Load Spools")
     choice = input("> ").strip()
 
     if not choice.isdigit():
@@ -47,7 +68,12 @@ def main():
         if menu_choice == 1:
             create_spool()
         elif menu_choice == 2:
-            print("2 has been selected")
+            for s in spools:
+                print(s["sbrand"], s["stype"], s["sbrand"])
+        elif menu_choice == 3:
+            save_spools()
+        elif menu_choice == 4:
+            load_spools()
         else:
             print("Error, try again")
 
