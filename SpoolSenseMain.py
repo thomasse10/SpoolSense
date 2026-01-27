@@ -3,7 +3,7 @@
 
 #Unfinished main script
 
-#Debug
+#Debug Mode
 debug = True
 def debugprint(msg):
     if debug:
