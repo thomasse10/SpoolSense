@@ -1,4 +1,4 @@
 # SpoolSense
 3D printer filament spool tracker
 
-**Not at MVP yet**
+**Not at terminal version MVP yet**
