@@ -53,18 +53,33 @@ def load_spools():
 #create spool
 def create_spool():
     global spools
-    spoolused = input("Has this Spool been used before? Y/N: ")
+    spoolused = input("Has this Spool been used before? Y/N: ").strip()
     if spoolused.lower() == "n":
-        sbrand = input("Enter brand of Filament: ").strip().lower()
+        sbrand = input("Enter brand of Filament: ").lower()
         debugprint(sbrand)
         stype = input("Enter type of Filament: ").strip().lower()
         debugprint(stype)
         scolour = input("Enter colour of Filament: ").strip().lower()
         debugprint(scolour)
-        sweight = float(input("Enter weight of filament in kg: ").strip())
-        spools.append({"sbrand": sbrand, "stype": stype, "scolour": scolour, "sweight": sweight})
+        if spoolused.lower() == "y":
+            knownemptyspoolw = input("Do you know the empty spool weight? Y/N: ").strip()
+            if knownemptyspoolw == "y":
+                emptyspoolw = input("please enter empty spool weight in g: ")
+            sremainingw = input("Enter approximate remaining filament in g: ").strip()
+        else:
+            sremainingw = float(input("Enter weight of filament in g: ").strip())
+        spools.append({"sbrand": sbrand, "stype": stype, "scolour": scolour, "sremainingw": sremainingw})
         return None
+        
 
+#update spool weight
+'''
+def update_spoolw():
+    global spools
+    if spools:
+        return None
+'''
+    
 
 def main_menu():
     print("---Main Menu---")
@@ -82,7 +97,7 @@ def main():
             create_spool()
         elif menu_choice == 2:
             for s in spools:
-                print(s["sbrand"], s["stype"], s["scolour"],s["sweight"])
+                print(s["sbrand"], s["stype"], s["scolour"],s["sremaningw"])
         elif menu_choice == 3:
             save_spools()
         elif menu_choice == 4:
