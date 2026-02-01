@@ -77,16 +77,31 @@ def create_spool():
 def update_spool():
     global spools
     if spools:
-        #print("What would you like to edit?")
-        #change_choice = input("1. Update Spool weight")
         print("Select a spool:")
         for i,s in enumerate(spools,start=1):
             print(f"{i}.",s["sbrand"], s["stype"], s["scolour"],s["sremainingw"],"g")
         choice = input("> ").strip()
         index = int(choice) - 1
-        new_weight = float(input("Please enter new weight in grams: "))
-        spools[index]["sremainingw"] = new_weight
-        debugprint(spools)
+        print("What would you like to edit:\n1. Spool weight\n2. Spool brand\n3. Spool colour\n4. Spool type")
+        edit_choice = input("> ").strip()
+        if int(edit_choice) == 1:
+            new_weight = float(input("Please enter new weight in grams: "))
+            spools[index]["sremainingw"] = new_weight
+            debugprint(spools)
+        elif int(edit_choice) == 2:
+            new_brand = input("Please enter new brand name: ")
+            spools[index]["sbrand"] = new_brand
+            debugprint(spools)
+        elif int(edit_choice) == 3:
+            new_colour = input("Please enter new colour: ")
+            spools[index]["scolour"] = new_colour
+            debugprint(spools)
+        elif int(edit_choice) == 4:
+            new_type = input("Please enter new filament type: ")
+            spools[index]["sbrand"] = new_type
+            debugprint(spools)
+        else:
+            print("Error, Try again")
     else: 
         print("No spools could be found. ")
 
