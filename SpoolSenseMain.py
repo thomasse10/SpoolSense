@@ -39,7 +39,7 @@ def load_spools():
     try:
         with open(SAVEFILE, "r") as f:
             spools = json.load(f)
-        if spools.strip() == []:
+        if spools == []:
             print("Save file loaded successfully. \nWARNING: Save file is empty. ")
         else:
             print("Save file loaded successfully. ")
@@ -73,17 +73,24 @@ def create_spool():
         
 
 #update spool weight
-'''
-def update_spoolw():
+
+def update_spool():
     global spools
     if spools:
-        return None
-'''
+        #print("What would you like to edit?")
+        #change_choice = input("1. Update Spool weight")
+        print("Select a spool:")
+        for i,s in enumerate(spools,start=1):
+            print(f"{i}.",s["sbrand"], s["stype"], s["scolour"],s["sremainingw"],"g")
+        
+    else: 
+        print("No spools could be found. ")
+
     
 
 def main_menu():
     print("---Main Menu---")
-    print("Please choose an option:\n1. Add new Spool \n2. View Spools\n3. Save Spools\n4. Load Spools")
+    print("Please choose an option:\n1. Add new Spool \n2. View Spools\n3. Save Spools\n4. Load Spools\n5. Edit spools")
     choice = input("> ").strip()
 
     if not choice.isdigit():
@@ -97,11 +104,13 @@ def main():
             create_spool()
         elif menu_choice == 2:
             for s in spools:
-                print(s["sbrand"], s["stype"], s["scolour"],s["sremaningw"])
+                print(s["sbrand"], s["stype"], s["scolour"],s["sremainingw"],"g")
         elif menu_choice == 3:
             save_spools()
         elif menu_choice == 4:
             load_spools()
+        elif menu_choice == 5:
+            update_spool()
         else:
             print("Error, try again")
 
