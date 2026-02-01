@@ -82,7 +82,11 @@ def update_spool():
         print("Select a spool:")
         for i,s in enumerate(spools,start=1):
             print(f"{i}.",s["sbrand"], s["stype"], s["scolour"],s["sremainingw"],"g")
-        
+        choice = input("> ").strip()
+        index = int(choice) - 1
+        new_weight = float(input("Please enter new weight in grams: "))
+        spools[index]["sremainingw"] = new_weight
+        debugprint(spools)
     else: 
         print("No spools could be found. ")
 
