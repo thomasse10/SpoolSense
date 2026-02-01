@@ -61,11 +61,12 @@ def create_spool():
         debugprint(stype)
         scolour = input("Enter colour of Filament: ").strip().lower()
         debugprint(scolour)
-        if spoolused.lower() == "y":
-            knownemptyspoolw = input("Do you know the empty spool weight? Y/N: ").strip()
-            if knownemptyspoolw == "y":
-                emptyspoolw = input("please enter empty spool weight in g: ")
-            sremainingw = input("Enter approximate remaining filament in g: ").strip()
+    if spoolused.lower() == "y":
+        knownemptyspoolw = input("Do you know the empty spool weight? Y/N: ").strip()
+        if knownemptyspoolw == "y":
+            emptyspoolw = float(input("please enter empty spool weight in g: ")).strip()
+            fullspoolw = float(input("Please weigh full spool weight and enter in g: ")).strip()
+            sremainingw = fullspoolw - emptyspoolw
         else:
             sremainingw = float(input("Enter weight of filament in g: ").strip())
         spools.append({"sbrand": sbrand, "stype": stype, "scolour": scolour, "sremainingw": sremainingw})
