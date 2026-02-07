@@ -62,10 +62,16 @@ def create_spool():
         scolour = input("Enter colour of Filament: ").strip().lower()
         debugprint(scolour)
     if spoolused.lower() == "y":
-        knownemptyspoolw = input("Do you know the empty spool weight? Y/N: ").strip()
+        sbrand = input("Enter brand of Filament: ").lower()
+        debugprint(sbrand)
+        stype = input("Enter type of Filament: ").strip().lower()
+        debugprint(stype)
+        scolour = input("Enter colour of Filament: ").strip().lower()
+        debugprint(scolour)
+        knownemptyspoolw = input("Do you know the empty spool weight? Y/N: ")
         if knownemptyspoolw == "y":
-            emptyspoolw = float(input("please enter empty spool weight in g: ")).strip()
-            fullspoolw = float(input("Please weigh full spool weight and enter in g: ")).strip()
+            emptyspoolw = float(input("please enter empty spool weight in g: ").strip())
+            fullspoolw = float(input("Please weigh full spool weight and enter in g: ").strip())
             sremainingw = fullspoolw - emptyspoolw
         else:
             sremainingw = float(input("Enter weight of filament in g: ").strip())
@@ -73,9 +79,9 @@ def create_spool():
         return None
         
 
-#update spool weight
+#edit spool details
 
-def update_spool():
+def edit_spool():
     global spools
     if spools:
         print("Select a spool:")
@@ -85,21 +91,25 @@ def update_spool():
         index = int(choice) - 1
         print("What would you like to edit:\n1. Spool weight\n2. Spool brand\n3. Spool colour\n4. Spool type")
         edit_choice = input("> ").strip()
-        if int(edit_choice) == 1:
-            new_weight = float(input("Please enter new weight in grams: "))
+        try:
+            edit_choice = int(edit_choice)
+        except ValueError:
+            print("Invalid choice please try again. ")
+        if edit_choice == 1:
+            new_weight = float(input("Please enter new weight in grams: ").strip())
             spools[index]["sremainingw"] = new_weight
             debugprint(spools)
-        elif int(edit_choice) == 2:
+        elif edit_choice == 2:
             new_brand = input("Please enter new brand name: ")
             spools[index]["sbrand"] = new_brand
             debugprint(spools)
-        elif int(edit_choice) == 3:
+        elif edit_choice == 3:
             new_colour = input("Please enter new colour: ")
             spools[index]["scolour"] = new_colour
             debugprint(spools)
-        elif int(edit_choice) == 4:
+        elif edit_choice == 4:
             new_type = input("Please enter new filament type: ")
-            spools[index]["sbrand"] = new_type
+            spools[index]["stype"] = new_type
             debugprint(spools)
         else:
             print("Error, Try again")
@@ -112,9 +122,6 @@ def main_menu():
     print("---Main Menu---")
     print("Please choose an option:\n1. Add new Spool \n2. View Spools\n3. Save Spools\n4. Load Spools\n5. Edit spools")
     choice = input("> ").strip()
-
-    if not choice.isdigit():
-        return None
     return int(choice)
 
 def main():
@@ -130,7 +137,7 @@ def main():
         elif menu_choice == 4:
             load_spools()
         elif menu_choice == 5:
-            update_spool()
+            edit_spool()
         else:
             print("Error, try again")
 
